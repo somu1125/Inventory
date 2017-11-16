@@ -1,0 +1,65 @@
+<html>
+<head><title>User Login</title>
+<link rel="stylesheet" type="text/css" href="log.css">
+
+</head>
+<body>
+<?php
+$db = mysqli_connect('localhost','root','root','invntry')
+ or die('Error connecting to MySQL server.');
+?>
+<div class="login-page">
+  <div class="form">
+    <form class="register-form">
+      <input type="text" placeholder="name"/>
+      <input type="password" placeholder="password"/>
+      <input type="email" placeholder="example@xyz.com"/>
+      <button>create</button>
+      <p class="message">Already registered? <a href="#">Sign In</a></p>
+    </form>
+    <form class="login-form" method="post" action="login.html">
+      <input type="text" placeholder="username" name="name" required/>
+      <input type="password" placeholder="password" name="pass" required/>
+      <button>login</button>
+      <p class="message">Not registered? <a href="#">Create an account</a></p>
+    </form>
+	
+  </div>
+  <?php
+	$con = mysql_connect("localhost","root","");
+	mysql_select_db("invntry",$con);
+	$uname=trim($_POST('name'));
+	$pass=trim($_POST('pass'));
+	$result= "SELECT * FROM login WHERE username='".mysql_real_escape_string($_POST['user'])."'"; 
+	if($uname=="taushik")
+	{
+	echo "taushik";
+	}
+	?>
+	echo $result;
+$num=mysql_num_rows($result);
+echo $num;
+for($i=1;$i<=$num; $i++){
+while($row=mysql_fetch_array($result))
+{
+$user=$row['USER_NAME'];
+$pass=$row['PASS_WORD'];
+}
+}
+
+
+if($username == $user && $password ==$pass)
+{
+header("Location: display.php");
+}
+else if($password!= $pass ||$username != $user )
+{
+echo("Please Enter Correct Username and Password ...");
+header("Location: test.php");
+}
+
+  <script src="jquery-1.7.1.min.js"></script>
+<script src="anm.js"></script>
+</div>
+</body>
+</html>
